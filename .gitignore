@@ -1,7 +1,5 @@
 *.pptx
 *.docx
 *.pdf
-.~lock.airway.pptx#
 tempCodeRunnerFile.cpp
 .vscode
-.gitignore
