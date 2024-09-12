@@ -80,12 +80,58 @@ void mergeSort(int * arr,int s,int e){
     mergeSort(arr,mid+1,e);
     mergeArray(arr,s,mid,e);
 }
+//quick sort implementation 
+//partition and then quicksort
+//1.partition -> we take the first element and then find it's correct place ,also replace all the smaller elements to the left
+
+//2.then we divide the array based on the pivotIndex ,and then apply quickSort again
+int partition(int * arr,int s,int e){
+    int pivot=arr[s],cnt=0;
+    for (int i = s+1; i < e+1; i++)
+    {
+        if(pivot>arr[i])cnt++;
+    }
+    int pivotIndex=s+cnt;
+    swap(arr[s],arr[pivotIndex]);
+    int i=s,j=e;
+    while (i<pivotIndex && j>pivotIndex)
+    {
+        while (arr[i]<pivot)
+        {
+            i++;
+        }
+        while (arr[j]>=pivot)
+        {
+            j--;
+        }
+        if(i<pivotIndex && j>pivotIndex){
+            swap(arr[i],arr[j]);
+        }
+        
+        
+    }
+    return pivotIndex;
+
+    
+
+}
+
+
+void quickSort(int * arr,int s,int e){
+    if(s>=e) return ;
+    int p=partition(arr,s,e);
+    quickSort(arr,s,p-1);
+    quickSort(arr,p+1,e);
+}
+
+
 int main(){
     int a[]={2,1,8,4,6};
     int b[]={4,6,1,9,10,55,4,1,23,9,52};
     // insertionSort(b,11);
-    mergeSort(b,0,10);
-    printarray(b,11);   
+    // mergeSort(b,0,10);
+    quickSort(b,0,10);
+    printarray(b,11);
     // cout<<binarySearchFound(a,0,5,6)<<'\n';
     return 0;
 }
