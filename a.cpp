@@ -48,11 +48,43 @@ void insertionSort(int * arr,int size,int i=1){
 
 }
 
-void 
+void mergeArray(int * A,int s,int mid,int e){
+    int p=s,q=mid+1;
+    int Arr[e-s+1];
+    int k=0;
+
+   for(int i = s ;i <= e ;i++) {
+    if(p > mid)      //checks if first part comes to an end or not .
+       Arr[ k++ ] = A[ q++] ;
+
+   else if ( q > e)   //checks if second part comes to an end or not
+       Arr[ k++ ] = A[ p++ ];
+
+   else if( A[ p ] < A[ q ])     //checks which part has smaller element.
+      Arr[ k++ ] = A[ p++ ];
+
+   else
+      Arr[ k++ ] = A[ q++];
+ }
+  for (int p=0 ; p< k ;p ++) {
+   /* Now the real array has elements in sorted manner including both 
+        parts.*/
+     A[ s++ ] = Arr[ p ] ;                          
+  }
+    
+}
+void mergeSort(int * arr,int s,int e){
+    if(s>=e)return ;
+    int mid=s+(e-s)/2;
+    mergeSort(arr,s,mid);
+    mergeSort(arr,mid+1,e);
+    mergeArray(arr,s,mid,e);
+}
 int main(){
     int a[]={2,1,8,4,6};
     int b[]={4,6,1,9,10,55,4,1,23,9,52};
-    insertionSort(b,11);
+    // insertionSort(b,11);
+    mergeSort(b,0,10);
     printarray(b,11);   
     // cout<<binarySearchFound(a,0,5,6)<<'\n';
     return 0;
